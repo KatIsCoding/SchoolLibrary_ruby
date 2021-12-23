@@ -27,7 +27,6 @@ class Person
 
   def add_rental(rental)
     @rentals << rental unless @rentals.include?(rental)
-    rental.owner = self
   end
 
 
