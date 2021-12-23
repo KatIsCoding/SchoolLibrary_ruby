@@ -29,6 +29,5 @@ class Person
     @rentals << rental unless @rentals.include?(rental)
   end
 
-
   private :of_age?
 end
