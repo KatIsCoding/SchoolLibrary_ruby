@@ -7,9 +7,11 @@ class Rental
     @owner = owner
   end
   def book(book = @book)
+    @book = book
     @book.add_rental(self)
   end
   def owner(owner = @owner)
+    @owner = owner
     @owner.add_rental(self)
   end
     
