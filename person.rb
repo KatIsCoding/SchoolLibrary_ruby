@@ -7,6 +7,7 @@ class Person
     @age = age
     @parent_permission = parent_permission
     @corrector = Corrector.new
+    @rentals = []
   end
 
   attr_reader :id
@@ -22,6 +23,10 @@ class Person
 
   def of_age?
     @age >= 18
+  end
+
+  def add_rental(rental)
+    @rentals << rental unless @rentals.include?(rental)
   end
 
   private :of_age?
