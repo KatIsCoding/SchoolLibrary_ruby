@@ -73,7 +73,7 @@ def create_rental(rentals_list, people_list, books_list)
   print('Select the book that is being rented: ')
   book_id = gets.chomp.to_i
   unless book_id - 1 < books_list.length && person_id - 1 < people_list.length
-    puts 'Invalid book ID'
+    puts 'Invalid book OR person ID'
     return
   end
   book_obj = books_list[book_id - 1]
@@ -141,7 +141,6 @@ def rental_selections(choice, rentals_list, people_list, books_list)
     list_all_rentals_for_person(people_list)
   end
 end
-
 
 def menu_choices(books_list, people_list, rentals_list)
   choice = 0
