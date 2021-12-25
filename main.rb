@@ -64,22 +64,22 @@ def create_book(books_list)
   puts 'Book created successfully'
 end
 
-def create_rental(rentals_list)
-  list_all_people
+def create_rental(rentals_list, people_list, books_list)
+  list_all_people(people_list)
   print('Select the person who is renting the book: ')
   person_id = gets.chomp.to_i
   person_obj = people_list[person_id - 1]
-  list_all_books
+  list_all_books(books_list)
   print('Select the book that is being rented: ')
   book_id = gets.chomp.to_i
-  unless book_id - 1 >= books_list.length && person_id - 1 >= people_list.length
+  unless book_id - 1 < books_list.length && person_id - 1 < people_list.length
     puts 'Invalid book ID'
     return
   end
   book_obj = books_list[book_id - 1]
   print('Enter the rental date: ')
   rental_date = gets.chomp
-  rental = Rental.new(person_obj, book_obj, rental_date)
+  rental = Rental.new(rental_date, book_obj, person_obj)
   rental.inscribe_book
   rental.inscribe_owner
   rentals_list << rental
@@ -127,18 +127,18 @@ end
 def people_selections(choice, people_list)
   case choice
   when 3
-    list_all_people(people_list)
-  when 4
     create_person(people_list)
+  when 4
+    list_all_people(people_list)
   end
 end
 
-def rental_selections(choice, rentals_list)
+def rental_selections(choice, rentals_list, people_list, books_list)
   case choice
   when 5
-    create_rental(rentals_list)
+    create_rental(rentals_list, people_list, books_list)
   when 6
-    list_all_rentals_for_person(rentals_list)
+    list_all_rentals_for_person(people_list)
   end
 end
 
@@ -153,7 +153,7 @@ def menu_choices(books_list, people_list, rentals_list)
     when 3..4
       people_selections(choice, people_list)
     when 5..6
-      create_rental(rentals_list)
+      rental_selections(choice, rentals_list, people_list, books_list)
     when 7
       puts 'Goodbye'
       return 0
